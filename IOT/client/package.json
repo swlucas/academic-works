@@ -5,5 +5,11 @@
   "license": "MIT",
   "dependencies": {
     "net": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
   }
 }
