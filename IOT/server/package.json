@@ -11,9 +11,11 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "engines": {
-    "node": "16.11.x"
+    "node": "16.11.x",
+    "yarn": "1.x"
   }
 }
