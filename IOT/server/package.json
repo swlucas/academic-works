@@ -11,8 +11,8 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "webpack"
   },
   "engines": {
     "node": "13.11.x",
