@@ -9,7 +9,7 @@ const rl = readline.createInterface({
 
 net
   .createServer(function(socket) {
-    handleInput();
+    handleInput(socket);
 
     socket.on("data", function(data) {
       console.log("Received: " + data);
@@ -17,7 +17,7 @@ net
   })
   .listen(3000);
 
-const handleInput = () => {
+const handleInput = socket => {
   rl.on("line", input => {
     const a = { message: input };
     socket.write(`${a}\r\n`);
@@ -31,6 +31,7 @@ const listDevices = () => {
     console.log({ name, ip, port });
   });
 };
+
 listDevices();
 
 console.log("Chat server running at port 3000");
