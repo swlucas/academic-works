@@ -1,5 +1,6 @@
 {
   "name": "server",
+  "description": "a really cool app",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -15,7 +16,7 @@
     "build": "webpack"
   },
   "engines": {
-    "node": "13.11.x",
+    "node": "12.16.x",
     "yarn": "1.x"
   }
 }
