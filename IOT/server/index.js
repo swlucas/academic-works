@@ -12,7 +12,7 @@ net
     handleInput(socket);
 
     socket.on("data", function(data) {
-      console.log("Received: " + data);
+      socket.write(`Você enviou >>>> ${data}\r\n`);
     });
   })
   .listen(3000);
