@@ -1,37 +1,19 @@
 net = require("net");
 const readline = require("readline");
 const lineReader = require("line-reader");
+const PORT = process.env.PORT || 3000;
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-net
-  .createServer(function(socket) {
-    handleInput(socket);
-
-    socket.on("data", function(data) {
-      socket.write(`Você enviou >>>> ${data}\r\n`);
-    });
-  })
-  .listen(3000);
-
-const handleInput = socket => {
-  rl.on("line", input => {
-    const a = { message: input };
-    socket.write(`${a}\r\n`);
-    console.log(input);
+const server = net.createServer(function(socket) {
+  socket.write("Bem vindx\r\n");
+  socket.on("data", function(data) {
+    console.log(data.toString());
   });
-};
+});
 
-const listDevices = () => {
-  lineReader.eachLine("lista_dispositivos.txt", function(line) {
-    const [name, ip, port] = line.split(" ");
-    console.log({ name, ip, port });
-  });
-};
-
-listDevices();
-
-console.log("Chat server running at port 3000");
+server.listen(PORT);
+console.log(`Chat server running at port ${PORT}`);

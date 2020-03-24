@@ -12,11 +12,11 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "build": "webpack"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "engines": {
-    "node": "12.16.x",
+    "node": "13.11.x",
     "yarn": "1.x"
   }
 }

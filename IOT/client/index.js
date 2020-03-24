@@ -7,19 +7,17 @@ const rl = readline.createInterface({
 });
 
 const client = new net.Socket();
-client.connect(3000, "127.0.0.1", function() {
+client.connect(14361, "0.tcp.ngrok.io", function() {
   console.log("Connected");
   client.write("Hello, server! Love, Client.");
 });
 
 rl.on("line", input => {
   client.write(`${input}\r\n`);
-  console.log(input);
 });
 
 client.on("data", function(data) {
   console.log("Received: " + data);
-  // client.destroy(); // kill client after server's response
 });
 
 client.on("close", function() {
