@@ -1,5 +1,18 @@
 const net = require("net");
 const readline = require("readline");
+const lineReader = require("line-reader");
+const NAME = "TEMPERATURA";
+
+const devices = [];
+
+const listDevices = () => {
+  lineReader.eachLine("lista_dispositivos.txt", function(line) {
+    const [name, ip, port] = line.split(" ");
+    devices.push({ name, ip, port });
+  });
+};
+
+listDevices();
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -7,13 +20,17 @@ const rl = readline.createInterface({
 });
 
 const client = new net.Socket();
-client.connect(14361, "0.tcp.ngrok.io", function() {
-  console.log("Connected");
-  client.write("Hello, server! Love, Client.");
-});
+
+const handleConnect = ({ name, ip, port }) => {
+  client.connect(port, ip, function() {
+    client.write(`${name} ${ip} ${port}\r\n`);
+    // client.write("Hello, server! Love, Client.");
+  });
+};
 
 rl.on("line", input => {
-  client.write(`${input}\r\n`);
+  // client.write(`${input}\r\n`);
+  handleTerminal(input);
 });
 
 client.on("data", function(data) {
@@ -23,3 +40,20 @@ client.on("data", function(data) {
 client.on("close", function() {
   console.log("Connection closed");
 });
+const handleListDevices = () => {
+  console.log(devices);
+};
+
+const handleTerminal = input => {
+  const command = input.split(" ");
+  let device =
+    command.length === 3 && devices.find(({ name }) => name === command[2]);
+
+  command.length === 3 &&
+    command[0] === NAME &&
+    command[1] === "conectar" &&
+    device &&
+    handleConnect(device);
+
+  command == "devices" && handleListDevices();
+};
