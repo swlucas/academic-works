@@ -1,7 +1,7 @@
 const net = require("net");
 const readline = require("readline");
 const lineReader = require("line-reader");
-const NAME = "TEMPERATURA";
+const NAME = "Temperatura_L";
 
 const devices = [];
 
@@ -23,7 +23,7 @@ const client = new net.Socket();
 
 const handleConnect = ({ name, ip, port }) => {
   client.connect(port, ip, function() {
-    client.write(`${name} ${ip} ${port}\r\n`);
+    client.write(`${NAME} CONECTAR ${name}\r\n`);
     // client.write("Hello, server! Love, Client.");
   });
 };
@@ -51,7 +51,7 @@ const handleTerminal = input => {
 
   command.length === 3 &&
     command[0] === NAME &&
-    command[1] === "conectar" &&
+    command[1] === "CONECTAR" &&
     device &&
     handleConnect(device);
 
